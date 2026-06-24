@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>爱游戏 · 稳定入口与页面说明</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', sans-serif;
+            background: #f6f4f0;
+            color: #1f2a34;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 深色头图 — hero 区域 */
+        .hero {
+            position: relative;
+            background: #1a202c;
+            background-image: radial-gradient(circle at 20% 30%, #2b3342 0%, #13171f 90%);
+            min-height: 62vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 1.5rem 5rem;
+            color: #e8e6e1;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #c9a66b, #e3c89a, #c9a66b);
+            opacity: 0.6;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 8vw, 4.8rem);
+            font-weight: 350;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #efe3cf, #f7f0e3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.2rem;
+            line-height: 1.15;
+        }
+
+        .hero .sub {
+            font-size: 1.15rem;
+            font-weight: 300;
+            max-width: 640px;
+            opacity: 0.88;
+            background: rgba(255, 255, 245, 0.05);
+            backdrop-filter: blur(2px);
+            padding: 0.8rem 1.6rem;
+            border-radius: 48px;
+            border: 1px solid rgba(230, 215, 190, 0.15);
+            letter-spacing: 0.5px;
+        }
+
+        /* 主内容区 — 浅色背景，三段落自然叙述 */
+        .main-content {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 3rem 1.8rem 4.5rem;
+        }
+
+        .intro-block {
+            margin-bottom: 3rem;
+        }
+
+        .intro-block p {
+            margin-bottom: 1.4rem;
+            font-size: 1.05rem;
+            color: #2e3a45;
+        }
+
+        .intro-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2.2rem 2rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03);
+            margin: 2.5rem 0;
+            border: 1px solid #eae6df;
+            transition: box-shadow 0.2s;
+        }
+
+        .section-card h2 {
+            font-size: 1.5rem;
+            font-weight: 480;
+            letter-spacing: -0.01em;
+            color: #1f2a34;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e4ddcf;
+            display: inline-block;
+        }
+
+        .section-card p {
+            margin-bottom: 1.2rem;
+            color: #2e3a45;
+        }
+
+        .section-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .accent-link {
+            color: #9b6f4a;
+            text-decoration: none;
+            font-weight: 450;
+            border-bottom: 1px solid #d7c8b2;
+            transition: color 0.2s, border-bottom-color 0.2s;
+        }
+
+        .accent-link:hover {
+            color: #7d5539;
+            border-bottom-color: #9b6f4a;
+        }
+
+        .highlight-line {
+            background: #f1ede7;
+            padding: 0.3rem 0.8rem;
+            border-radius: 24px;
+            display: inline-block;
+            font-size: 0.92rem;
+            color: #574f44;
+            letter-spacing: 0.3px;
+            margin: 0.2rem 0;
+        }
+
+        .faq-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .faq-item {
+            border-left: 3px solid #d2c2aa;
+            padding-left: 1.2rem;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 500;
+            color: #1f2a34;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-item p {
+            color: #3f4c58;
+            margin: 0;
+        }
+
+        /* 页尾提示 */
+        .page-footer {
+            background: #1f242b;
+            color: #c9c3b8;
+            text-align: center;
+            padding: 2.8rem 1.5rem 3.2rem;
+            font-size: 0.98rem;
+            letter-spacing: 0.3px;
+            border-top: 1px solid #3f3f3f;
+        }
+
+        .page-footer a {
+            color: #dac29b;
+            text-decoration: none;
+            border-bottom: 1px dotted #6a5f4a;
+        }
+
+        .page-footer a:hover {
+            color: #f2e3ca;
+            border-bottom: 1px solid #dac29b;
+        }
+
+        .dot-divider {
+            display: inline-block;
+            margin: 0 0.8rem;
+            color: #5f5b55;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 600px) {
+            .hero {
+                min-height: 48vh;
+                padding: 3rem 1.2rem 3.5rem;
+            }
+
+            .hero .sub {
+                font-size: 1rem;
+                padding: 0.6rem 1.2rem;
+            }
+
+            .main-content {
+                padding: 2.2rem 1.2rem 3rem;
+            }
+
+            .section-card {
+                padding: 1.6rem 1.2rem;
+                margin: 1.8rem 0;
+            }
+
+            .section-card h2 {
+                font-size: 1.3rem;
+            }
+
+            .faq-item {
+                padding-left: 0.9rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .intro-block p {
+                font-size: 0.98rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 hero -->
+    <section class="hero">
+        <h1>爱游戏</h1>
+        <div class="sub">一份稳定、清晰的访问起点 · 页面背景与说明</div>
+    </section>
+
+    <!-- 浅色正文区 三段自然介绍 + FAQ 摘要 -->
+    <div class="main-content">
+
+        <!-- 第一段：背景与初衷 -->
+        <div class="intro-block">
+            <p>
+                在各类信息纷杂的网络上，一个可靠、安静的入口往往比什么都重要。
+                我们整理了这个页面，目的是为了更直接地说明「<a href="https://addon-ayx.com.cn" class="accent-link">爱游戏</a>」所对应的服务背景与访问方式。
+                这里没有冗长的跳转，也没有令人困惑的多重链接，只希望第一次到来的用户，也能快速获得一种平实的认知。
+            </p>
+            <p>
+                这份介绍从稳定入口和页面说明的角度出发，梳理了大家最常关心的几个侧面。
+                下面的三段内容分别涉及场景适配、信息获取以及常见疑问的摘要，它们共同构成一个相对完整的轮廓。
+            </p>
+        </div>
+
+        <!-- 第二段 卡片式自然叙述：特点与场景 -->
+        <div class="section-card">
+            <h2>· 熟悉的界面，一致的路径</h2>
+            <p>
+                无论你是在办公间隙，还是在休息时随意浏览，保持一个稳定的访问习惯会让很多事情变得更简单。
+                很多时候，用户需要的不是一个复杂的信息门户，而是一个长期有效、页面结构清晰的锚点。
+                <a href="https://addon-ayx.com.cn" class="accent-link">爱游戏</a>所指向的空间，正尝试以这种克制的形态存在——界面不频繁变动，主要功能模块保持统一，让每一次使用都像上次一样顺手。
+            </p>
+            <p>
+                从使用场景来看，无论是内容浏览、互动参与还是简单的信息查阅，其核心流程都经过了一定的梳理。页面布局遵循常见的阅读顺序，重要入口保持醒目但不过度渲染。这种设计思路，让新用户几乎不需要学习就能直接开始。
+                <span class="highlight-line">稳定的结构 · 克制的交互</span>
+            </p>
+        </div>
+
+        <!-- 第三段 卡片式：信息获取与持续性 -->
+        <div class="section-card">
+            <h2>· 关于持续性与页面说明</h2>
+            <p>
+                一个常常被忽略但至关重要的问题，是访问入口的长期有效性。
+                很多服务因为链接变更或页面重构，导致用户花费额外时间去寻找新的路径。
+                而保持一个固定的说明页，同时将核心链接明确指向 <a href="https://addon-ayx.com.cn" class="accent-link">爱游戏</a>，
+                本身就是对稳定性的承诺——至少在这个页面上，你不会遇到失效的跳转或误导性的指引。
+            </p>
+            <p>
+                与此同时，本页也承担了「页面说明」的功能：所有出现在这里的信息，都经过最基本的核对，不渲染、不夸张。
+                我们相信，用户更需要的是一份真实的背景介绍，而不是漂亮的广告词。因此，每个段落都尽量具体、平实，避免空洞的套话。
+            </p>
+        </div>
+
+        <!-- FAQ 摘要 简洁条目 -->
+        <div class="faq-mini">
+            <div class="faq-item">
+                <strong>Q · 这个页面与主站的关系是什么？</strong>
+                <p>本页是一个独立的介绍与说明页，帮助大家了解背景并稳定访问 <a href="https://addon-ayx.com.cn" class="accent-link">爱游戏</a>。主站的具体功能请以实际页面为准。</p>
+            </div>
+            <div class="faq-item">
+                <strong>Q · 为什么强调“稳定入口”？</strong>
+                <p>因为网络访问环境变化较快，一个长期不变、内容克制的说明页，可以有效降低寻找入口的时间成本。所有链接指向唯一且确认有效。</p>
+            </div>
+            <div class="faq-item">
+                <strong>Q · 页面内容会频繁更新吗？</strong>
+                <p>不会。本页以说明和引导为主，除非背景信息有重大调整，否则保持长期稳定。偶尔会补充一些使用提示，但核心结构不变。</p>
+            </div>
+        </div>
+
+        <!-- 简短提示 自然过渡到页尾 -->
+        <p style="margin-top: 2.2rem; font-size: 0.96rem; color: #5b6b79; border-left: 2px solid #d1c4b2; padding-left: 1rem;">
+            您可以随时回到这个页面确认访问路径，也可以将链接收藏以便日常使用。
+        </p>
+
+    </div>
+
+    <!-- 页尾访问提示 -->
+    <footer class="page-footer">
+        <p>
+            <span>背景说明 · 稳定入口</span>
+            <span class="dot-divider">·</span>
+            <span>直接访问 <a href="https://addon-ayx.com.cn">爱游戏</a></span>
+            <span class="dot-divider">·</span>
+            <span>如有疑问请以主站最新信息为准</span>
+        </p>
+        <p style="margin-top: 0.8rem; font-size: 0.88rem; opacity: 0.7;">
+            页面版本：专题式 · 叙述向 · 2025
+        </p>
+    </footer>
+
+</body>
+</html>
