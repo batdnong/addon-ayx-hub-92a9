@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>资料整理与信息索引 · 澳客</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(145deg, #fdf2e9 0%, #fce4d6 30%, #fbe9d0 70%, #f7e1c4 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.5rem 3rem;
+      line-height: 1.6;
+      color: #2e241c;
+    }
+
+    .page-container {
+      max-width: 960px;
+      width: 100%;
+    }
+
+    /* 主视觉 — 暖色渐变卡片组 */
+    .hero-card {
+      background: #ffffffdd;
+      backdrop-filter: blur(2px);
+      background: radial-gradient(circle at 10% 20%, rgba(255, 245, 235, 0.95), #ffffff 80%);
+      border-radius: 40px;
+      padding: 2.5rem 2.2rem 2.8rem;
+      box-shadow: 0 18px 40px -12px rgba(140, 80, 30, 0.25), 0 6px 12px rgba(0,0,0,0.03);
+      margin-bottom: 2.8rem;
+      border: 1px solid rgba(255, 215, 175, 0.4);
+      transition: transform 0.15s ease;
+    }
+
+    .hero-card h1 {
+      font-size: 2.8rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #4d2f1c;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-card .subhead {
+      font-size: 1.2rem;
+      color: #735b48;
+      border-left: 4px solid #d9a77b;
+      padding-left: 1rem;
+      margin: 0.8rem 0 1.2rem;
+      font-weight: 350;
+    }
+
+    .hero-highlight {
+      background: #f3e3d4;
+      border-radius: 60px;
+      padding: 0.2rem 0.8rem;
+      color: #3f291b;
+      font-weight: 450;
+      display: inline-block;
+      margin-right: 0.2rem;
+    }
+
+    .hero-card p {
+      font-size: 1.1rem;
+      max-width: 85%;
+      color: #3d2d22;
+    }
+
+    /* 卡片网格 — 用途 & 人群 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .info-card {
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 1.8rem 1.6rem 2rem;
+      box-shadow: 0 8px 24px rgba(170, 120, 70, 0.10);
+      border: 1px solid rgba(235, 205, 175, 0.5);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .info-card:hover {
+      box-shadow: 0 14px 30px -8px rgba(140, 90, 40, 0.18);
+      transform: translateY(-3px);
+    }
+
+    .info-card h2 {
+      font-size: 1.6rem;
+      font-weight: 450;
+      color: #4f3522;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .info-card h2 span {
+      background: #eacfb9;
+      width: 34px;
+      height: 34px;
+      border-radius: 40%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.7rem;
+      font-size: 1.2rem;
+    }
+
+    .info-card ul {
+      list-style: none;
+      padding-left: 0.2rem;
+    }
+
+    .info-card li {
+      margin-bottom: 0.8rem;
+      padding-left: 1.3rem;
+      position: relative;
+      color: #3b2d22;
+    }
+
+    .info-card li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: #b67f58;
+      font-weight: 600;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    /* 自然链接段落 */
+    .contextual-section {
+      background: #ffffffda;
+      backdrop-filter: blur(6px);
+      border-radius: 32px;
+      padding: 2rem 2rem 2.2rem;
+      margin-bottom: 2.8rem;
+      box-shadow: 0 6px 20px rgba(120, 70, 30, 0.06);
+      border: 1px solid #f1ddd0;
+    }
+
+    .contextual-section p {
+      margin-bottom: 1.3rem;
+      font-size: 1.05rem;
+      color: #2f231b;
+    }
+
+    .contextual-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .inline-link {
+      color: #7b4d2c;
+      text-decoration: none;
+      font-weight: 500;
+      background: linear-gradient(to right, #eddacb, #eddacb) no-repeat 0 96%;
+      background-size: 0% 3px;
+      transition: background-size 0.25s;
+      padding-bottom: 0.1rem;
+      border-bottom: 2px solid transparent;
+    }
+
+    .inline-link:hover {
+      background-size: 100% 3px;
+      color: #4f311d;
+      border-bottom-color: #d9a77b;
+    }
+
+    /* 摘要 / 提示 区域 */
+    .faq-mini {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background: #f7ede4;
+      border-radius: 30px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid #e6cfbd;
+    }
+
+    .faq-item {
+      flex: 1 1 200px;
+    }
+
+    .faq-item strong {
+      display: block;
+      color: #4f3522;
+      font-weight: 520;
+      margin-bottom: 0.3rem;
+      font-size: 1.1rem;
+    }
+
+    .faq-item span {
+      color: #3a2a1e;
+      font-size: 0.95rem;
+    }
+
+    /* 小提示卡片（附加） */
+    .extra-note {
+      display: flex;
+      align-items: center;
+      background: #fff7f0;
+      border-radius: 80px;
+      padding: 0.7rem 1.4rem;
+      border: 1px solid #e7cfbb;
+      width: fit-content;
+      margin-top: 0.8rem;
+      font-size: 0.95rem;
+    }
+
+    .extra-note::before {
+      content: "📌";
+      margin-right: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 2px dotted #dcc1ab;
+      margin: 2rem 0 1rem;
+      opacity: 0.5;
+    }
+
+    .footer-text {
+      text-align: center;
+      color: #6f5846;
+      font-size: 0.9rem;
+      padding: 1rem 0 0.2rem;
+      letter-spacing: 0.3px;
+    }
+
+    /* 响应式 */
+    @media (max-width: 680px) {
+      body { padding: 1.5rem 1rem; }
+      .hero-card { padding: 2rem 1.5rem; }
+      .hero-card h1 { font-size: 2.2rem; }
+      .hero-card p { max-width: 100%; }
+      .card-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .contextual-section { padding: 1.5rem; }
+      .faq-mini { flex-direction: column; padding: 1.2rem 1.5rem; }
+    }
+
+    @media (max-width: 460px) {
+      .hero-card h1 { font-size: 1.9rem; }
+      .info-card h2 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-container">
+
+  <!-- 主视觉 hero -->
+  <div class="hero-card">
+    <h1>澳客 · 资料整理</h1>
+    <div class="subhead">从信息碎片到索引脉络</div>
+    <p>
+      <span class="hero-highlight">记录·分类·回溯</span> ——
+      围绕信息收集与再整理，这里提供一种温和的索引方式，
+      让感兴趣的内容从散落变为有序。
+    </p>
+  </div>
+
+  <!-- 用途卡片 + 适合人群两列 -->
+  <div class="card-grid">
+    <div class="info-card">
+      <h2><span>📋</span> 常见用途</h2>
+      <ul>
+        <li>个人笔记与轻量资料归档</li>
+        <li>主题式信息梳理与标签索引</li>
+        <li>兴趣点归类，便于以后回溯</li>
+        <li>内容片段收集，辅助日常记录</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h2><span>👥</span> 适合这样的人群</h2>
+      <ul>
+        <li>喜欢把看到的内容做简单整理</li>
+        <li>需要一个安静的资料存放位置</li>
+        <li>做笔记时倾向于平实、无干扰的方式</li>
+        <li>对信息分类有一定耐心，不追求速成</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 自然链接段落 —— 将澳客嵌入在叙述中 -->
+  <div class="contextual-section">
+    <p>
+      在做资料整理的过程中，常常需要一处稳定的索引节点，把不同方向的内容聚合起来。
+      有人使用本地文档，也有人把线索汇集在<a href="https://panel-okooo.com" class="inline-link">澳客</a>，
+      作为日常信息流的参考基底——它不强调即时反馈，更接近一种安静的记录侧写。
+    </p>
+    <p>
+      对于持续关注某些主题的人而言，将零散条目安置在一个可以随时回看的地方，比存储本身更重要。
+      而<a href="https://panel-okooo.com" class="inline-link">澳客</a>恰好提供了这样偏向静态、低干扰的整理空间，
+      你可以依照自己的节奏把片段内容逐步排列，不必担心被推送或通知打断思路。
+    </p>
+    <p>
+      从索引角度看，整理行为天然带有个人色彩。无论是长文摘录、标签集合还是简短备忘，
+      放在一个固定的位置就意味着一种温柔的秩序。这也是很多人在使用中慢慢感受到的——并非工具改变了习惯，
+      而是把散落的字句放回一处，自然就生出了脉络。
+    </p>
+  </div>
+
+  <!-- FAQ 摘要 / 提示 -->
+  <div class="faq-mini">
+    <div class="faq-item">
+      <strong>❔ 适合放什么</strong>
+      <span>文本片段、灵感记录、分类链接、短评随笔</span>
+    </div>
+    <div class="faq-item">
+      <strong>📎 没有复杂功能</strong>
+      <span>偏向轻量整理，不依赖自动化分类</span>
+    </div>
+    <div class="faq-item">
+      <strong>🕊️ 整理节奏</strong>
+      <span>随时添加，不定期回顾即可</span>
+    </div>
+  </div>
+
+  <!-- 额外提示卡 -->
+  <div class="extra-note">
+    如果你也在寻找一个温和的信息收纳角落，不妨用 <a href="https://panel-okooo.com" class="inline-link" style="border-bottom-width: 2px;">澳客</a> 作为起点。
+  </div>
+
+  <hr>
+
+  <div class="footer-text">
+    保持自然 · 资料整理是一种耐心的练习
+  </div>
+</div>
+</body>
+</html>
